@@ -69,10 +69,7 @@ finalTeam = ""
 currFitness = 0
 
 # Generate initial population by random selection
-chromosomes = []
-for x in range(POP_SIZE):
-    chromo = random.sample(range(101), num_players)
-    chromosomes.append(chromo)
+chromosomes = [random.sample(range(101), num_players) for _ in range(POP_SIZE)]
 
 # Evolution over 500 generations
 for gen in range(500):  
