@@ -25,11 +25,8 @@ for base_index in range(0,4):
     num_players = int(input("Enter the Number of " + categories[base_index] + " Players: "))
     budget = int(input("Enter the Max Budget in Million Euros (Recommended = " +  str(num_players*60) + "): "))
     
-    if teamname == "BARCA":
-        STRATEGY = BARCA
-    else:
-        STRATEGY = MADRID
-
+    STRATEGY = BARCA if teamname == "BARCA" else MADRID
+    
     included_columns = ['Name', 'Value', 'Acceleration', 'Agility', 'Ball control', 'Crossing', 'Dribbling', 'Heading accuracy', 'Long shots', 'Short passing', 'Sprint speed', 'Strength', 'Vision']
 
     # Extracting required columns from the Data
@@ -57,12 +54,10 @@ for base_index in range(0,4):
     population = dataSet[included_columns].values.tolist()
     lim = len(population)-1
 
-    fit, names, finalTeam, currFitness, chromosomes = [], [], "", 0, []
+    fit, names, finalTeam, currFitness = [], [], "", 0
 
     # Generate initial population by random selection
-    for x in range(POP_SIZE):
-        chromo = random.sample(range(lim), num_players)
-        chromosomes.append(chromo)
+    chromosomes = [random.sample(range(lim), num_players) for _ in range(POP_SIZE)]
 
     # Evolution over 500 generations
     for gen in range(500):  
